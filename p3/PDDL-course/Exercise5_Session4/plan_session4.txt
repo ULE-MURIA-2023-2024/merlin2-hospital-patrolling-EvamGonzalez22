@@ -1,0 +1,32 @@
+
+ff: parsing domain file
+domain 'ROBOT_TRANSPORT' defined
+ ... done.
+ff: parsing problem file
+problem 'ROBOT_PROBLEM' defined
+ ... done.
+
+
+
+Cueing down from goal distance:    4 into depth [1]
+                                   3            [1][2]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: PICK BOX ROOM1
+        1: MOVE ROOM1 ROOM2
+        2: CHARGE ROOM2
+        3: MOVE ROOM2 ROOM3
+        4: PLACE BOX ROOM3
+     
+
+time spent:    0.00 seconds instantiating 29 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 10 facts and 11 actions
+               0.00 seconds creating final representation with 10 relevant facts
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 7 states, to a max depth of 2
+               0.00 seconds total time
+

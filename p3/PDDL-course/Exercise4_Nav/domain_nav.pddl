@@ -1,0 +1,32 @@
+(define (domain waypoints_nav)
+  (:requirements :strips :typing :negative-preconditions :equality)
+  (:types bot waypoint item)
+  (:predicates
+    (at-bot ?b - bot ?wp - waypoint)
+    (at-item ?i - item ?wp - waypoint)
+    (connected ?wp1 ?wp2 - waypoint)
+    (clear ?wp - waypoint)
+    (holding ?b - bot ?i - item)
+    (hand-empty ?b - bot)
+  )
+  (:action move
+    :parameters (?b - bot ?from - waypoint ?to - waypoint)
+    :precondition (and (at-bot ?b ?from) (connected ?from ?to) (clear ?to))
+    :effect (and (not (at-bot ?b ?from)) (at-bot ?b ?to))
+  )
+  (:action remove_obstacle
+    :parameters (?b - bot ?from - waypoint ?obstacle_wp - waypoint)
+    :precondition (and (at-bot ?b ?from) (connected ?from ?obstacle_wp) (not (clear ?obstacle_wp)) (hand-empty ?b))
+    :effect (clear ?obstacle_wp)
+  )
+  (:action pick_up
+    :parameters (?b - bot ?i - item ?wp - waypoint)
+    :precondition (and (at-bot ?b ?wp) (at-item ?i ?wp) (hand-empty ?b))
+    :effect (and (not (at-item ?i ?wp)) (not (hand-empty ?b)) (holding ?b ?i))
+  )
+  (:action put_down
+    :parameters (?b - bot ?i - item ?wp - waypoint)
+    :precondition (and (at-bot ?b ?wp) (holding ?b ?i))
+    :effect (and (not (holding ?b ?i)) (hand-empty ?b) (at-item ?i ?wp))
+  )
+)
