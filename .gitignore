@@ -1,68 +1,32 @@
-# ROS 2 Workspaces
+# --- Carpeta de compilación y temporales (SIEMPRE IGNORAR) ---
 build/
 install/
 log/
-
-# Python Cache & Bytecode
+**/build/
+**/install/
+**/log/
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
-
-# Python virtual environments & packages
-env/
-venv/
-.env/
-.venv/
-.Python
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 
-# Workspace files (VSCode, idea, etc.)
+# --- Entornos virtuales y configuraciones de editor ---
+venv/
+.venv/
+env/
 .vscode/
 .idea/
 *.swp
-*.swo
 *~
-
-# OS generated files
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
 
-# Other logs
-*.log
-
-# Ignorar basura de ROS 2 en yasmin
-yasmin/build/
-yasmin/install/
-yasmin/log/
-
-# Ignorar el repositorio de Groot
+# --- Ignorar repositorios clonados externos (basura de terceros) ---
 p2/Groot/
-
-# Ignorar TODO el código y basura de YASMIN
 yasmin/.github/
-yasmin/build/
 yasmin/docs/
-yasmin/install/
-yasmin/log/
 yasmin/yasmin/
 yasmin/yasmin_demos/
 yasmin/yasmin_editor/
@@ -70,6 +34,3 @@ yasmin/yasmin_factory/
 yasmin/yasmin_msgs/
 yasmin/yasmin_ros/
 yasmin/yasmin_viewer/
-
-# Ignorar el repositorio de Groot
-p2/Groot/
