@@ -48,3 +48,28 @@ Thumbs.db
 
 # Other logs
 *.log
+
+# Ignorar basura de ROS 2 en yasmin
+yasmin/build/
+yasmin/install/
+yasmin/log/
+
+# Ignorar el repositorio de Groot
+p2/Groot/
+
+# Ignorar TODO el código y basura de YASMIN
+yasmin/.github/
+yasmin/build/
+yasmin/docs/
+yasmin/install/
+yasmin/log/
+yasmin/yasmin/
+yasmin/yasmin_demos/
+yasmin/yasmin_editor/
+yasmin/yasmin_factory/
+yasmin/yasmin_msgs/
+yasmin/yasmin_ros/
+yasmin/yasmin_viewer/
+
+# Ignorar el repositorio de Groot
+p2/Groot/
