@@ -1,0 +1,23 @@
+
+<root main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <Fallback name="ComportamientoPrincipal">
+            
+            <Sequence name="Si_detecta_obstaculo">
+                <Condition ID="DetectaObstaculo" />
+                <Action ID="Detenerse" />
+                <Action ID="Girar" />
+            </Sequence>
+            
+            <Action ID="Avanzar" />
+            
+        </Fallback>
+    </BehaviorTree>
+
+    <TreeNodesModel>
+        <Condition ID="DetectaObstaculo"/>
+        <Action ID="Detenerse"/>
+        <Action ID="Girar"/>
+        <Action ID="Avanzar"/>
+    </TreeNodesModel>
+</root>
