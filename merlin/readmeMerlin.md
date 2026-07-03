@@ -50,19 +50,41 @@ El "cerebro" principal que orquesta todo el proceso.
 
 ##  Cómo ejecutar la práctica
 
-1. Arrancar el contenedor de MERLIN2.
+Para probar la práctica, es necesario abrir dos terminales dentro del contenedor Docker.
+
+### Terminal 1: Simulador (Gazebo y RViz)
+Lanza el entorno 3D del hospital y el robot:
 
 ```bash
-   rocker --x11 --user --network host merlin2_docker
+source /opt/ros/humble/setup.bash
+source /root/ros2_ws/install/setup.bash
+ros2 launch rb1_sandbox hospital.launch.py
+
+
+
+![alt text](image-1.png)
+
+El robot, en blanco 
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
 ```
 
-2. Lanzar el simulador del hospital:
+### Terminal 2: Nodos de Misión
+Tras compilar el espacio de trabajo, ejecuta el coordinador y la máquina de estados:
 
 ```bash
-   ros2 launch rb1_sandbox hospital.launch.py
+source /opt/ros/humble/setup.bash
+source /root/ros2_ws/install/setup.bash
+source install/setup.bash
+ros2 launch merlin2_hospital_patrolling hospital_patrolling.launch.py
 ```
 
-3. en otra terminal
-```bash
-   ros2 launch merlin2_hospital_patrolling hospital_patrolling.launch.py
-```
+### Comportamiento del Sistema
+1. **Inicialización:** `mission_node` lee las coordenadas de las 5 *Stretcher Rooms* desde el archivo `stretcher_room_waypoints.yaml`.
+2. **Asignación:** Se envía la primera coordenada al `patrol_action_node` como un *Action Goal*.
+3. **Navegación:** La máquina de estados (YASMIN) procesa la orden y usa *Nav2* para mover al robot sorteando obstáculos.
+4. **Bucle de Patrulla:** Al alcanzar el destino (resultado `SUCCESS`), el nodo de misión asigna la siguiente habitación, repitiendo el ciclo hasta visitar los 5 puntos.
+EOF

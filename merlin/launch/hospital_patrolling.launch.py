@@ -24,7 +24,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
 import ament_index_python
-from kant_dao.dao_factory import DaoFamilies
+# from kant_dao.dao_factory import DaoFamilies
 from launch_ros.actions import Node
 
 
@@ -41,9 +41,10 @@ def generate_launch_description():
     # ARGS
     #
     dao_family = LaunchConfiguration("dao_family")
+    
     dao_family_cmd = DeclareLaunchArgument(
         "dao_family",
-        default_value=str(int(DaoFamilies.ROS2)),
+        default_value="2",
         description="DAO family")
 
     mongo_uri = LaunchConfiguration("mongo_uri")
@@ -108,8 +109,29 @@ def generate_launch_description():
     ld.add_action(planner_cmd)
     ld.add_action(mongo_uri_cmd)
 
-    # TODO: add the patrol action node
-    # TODO: add the mission node
+# TODO: create the patrol action node
+    patrol_action_cmd = Node(
+        package="merlin2_hospital_patrolling",
+        executable="patrol_action_node",  
+        name="patrol_action_node",
+        parameters=[{
+            "dao_family": dao_family,
+            "mongo_uri": mongo_uri
+        }]
+    )
+
+    # TODO: create the mission node
+    mission_cmd = Node(
+        package="merlin2_hospital_patrolling",
+        executable="mission_node",  
+        name="mission_node",
+        parameters=[{
+            "dao_family": dao_family,
+            "mongo_uri": mongo_uri
+        }]
+    )
+
+
     ld.add_action(merlin2_navigation_action_cmd)
 
     ld.add_action(text_to_speech_cmd)
